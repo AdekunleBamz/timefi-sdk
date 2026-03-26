@@ -1,0 +1,43 @@
+{
+    "name": "timefi-sdk",
+    "version": "0.1.0",
+    "description": "Core SDK for interacting with TimeFi Protocol on Stacks",
+    "main": "dist/index.js",
+    "module": "dist/index.esm.js",
+    "files": [
+        "dist",
+        "README.md",
+        "LICENSE"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AdekunleBamz/TimeFi-Protocol.git"
+    },
+    "bugs": {
+        "url": "https://github.com/AdekunleBamz/TimeFi-Protocol/issues"
+    },
+    "homepage": "https://github.com/AdekunleBamz/TimeFi-Protocol#readme",
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "build": "vite build",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "stacks",
+        "bitcoin",
+        "clarity",
+        "defi",
+        "time-lock"
+    ],
+    "author": "AdekunleBamz",
+    "license": "MIT",
+    "dependencies": {
+        "@stacks/network": "^6.13.0",
+        "@stacks/transactions": "^6.14.0"
+    },
+    "devDependencies": {
+        "vite": "^5.0.0"
+    }
+}
