@@ -11,12 +11,12 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/AdekunleBamz/TimeFi-Protocol.git"
+        "url": "git+https://github.com/AdekunleBamz/timefi-sdk.git"
     },
     "bugs": {
-        "url": "https://github.com/AdekunleBamz/TimeFi-Protocol/issues"
+        "url": "https://github.com/AdekunleBamz/timefi-sdk/issues"
     },
-    "homepage": "https://github.com/AdekunleBamz/TimeFi-Protocol#readme",
+    "homepage": "https://github.com/AdekunleBamz/timefi-sdk#readme",
     "publishConfig": {
         "access": "public"
     },
