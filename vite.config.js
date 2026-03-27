@@ -6,7 +6,7 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, 'src/index.js'),
             name: 'TimeFiSDK',
-            fileName: (format) => `index.${format === 'es' ? 'esm.js' : 'js'}`,
+            fileName: (format) => `index.${format === 'es' ? 'mjs' : 'cjs'}`,
             formats: ['es', 'cjs'],
         },
         rollupOptions: {

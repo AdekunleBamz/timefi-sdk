@@ -1,19 +1,28 @@
 {
     "name": "timefi-sdk",
-    "version": "0.1.1",
+    "version": "0.1.4",
     "description": "Official JavaScript SDK for TimeFi Protocol - Time-locked vaults on Stacks blockchain",
-    "main": "dist/index.js",
-    "module": "dist/index.esm.js",
+    "main": "dist/index.cjs",
+    "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.cjs"
+        }
+    },
     "files": [
         "dist",
         "README.md",
         "LICENSE"
     ],
     "scripts": {
-        "build": "vite build",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "prepublishOnly": "npm run build"
+        "clean": "rimraf dist",
+        "build": "npm run clean && vite build && npm run build:types",
+        "build:types": "tsc -p tsconfig.types.json",
+        "test": "vitest run",
+        "prepublishOnly": "npm run build && npm run test"
     },
     "keywords": [
         "stacks",
@@ -41,11 +50,17 @@
     "publishConfig": {
         "access": "public"
     },
-    "peerDependencies": {
+    "engines": {
+        "node": ">=18"
+    },
+    "dependencies": {
         "@stacks/transactions": "^6.0.0",
         "@stacks/network": "^6.0.0"
     },
     "devDependencies": {
-        "vite": "^5.0.0"
+        "rimraf": "^6.1.0",
+        "typescript": "^5.9.2",
+        "vite": "^5.0.0",
+        "vitest": "^4.0.8"
     }
 }

@@ -2,15 +2,46 @@ import {
     callReadOnlyFunction,
     cvToValue,
     uintCV,
-    principalCV,
     AnchorMode,
     PostConditionMode
 } from '@stacks/transactions';
 import { StacksMainnet, StacksTestnet } from '@stacks/network';
 import { CONTRACT_ADDRESS, CONTRACT_NAMES } from './constants.js';
 
+function assertPositiveInteger(value, fieldName) {
+    if (!Number.isInteger(value) || value <= 0) {
+        throw new Error(`${fieldName} must be a positive integer.`);
+    }
+}
+
+function toMicroStx(amountSTX) {
+    if (amountSTX === undefined || amountSTX === null) {
+        throw new Error('amountSTX is required');
+    }
+
+    const raw = String(amountSTX).trim();
+    if (!/^\d+(\.\d+)?$/.test(raw)) {
+        throw new Error('amountSTX must be a valid positive number.');
+    }
+
+    const [whole, fraction = ''] = raw.split('.');
+    if (fraction.length > 6) {
+        throw new Error('amountSTX supports at most 6 decimal places.');
+    }
+
+    const micros = BigInt(whole) * 1_000_000n + BigInt((fraction + '000000').slice(0, 6));
+    if (micros <= 0n) {
+        throw new Error('amountSTX must be greater than 0.');
+    }
+    return micros;
+}
+
 export class TimeFiClient {
     constructor(networkType = 'mainnet') {
+        if (!['mainnet', 'testnet'].includes(networkType)) {
+            throw new Error(`Invalid networkType "${networkType}". Use "mainnet" or "testnet".`);
+        }
+        this.networkType = networkType;
         this.network = networkType === 'mainnet'
             ? new StacksMainnet()
             : new StacksTestnet();
@@ -38,17 +69,17 @@ export class TimeFiClient {
     }
 
     async getVault(vaultId) {
-        if (vaultId === undefined || vaultId === null) throw new Error('vaultId is required');
+        assertPositiveInteger(vaultId, 'vaultId');
         return this.callReadOnly('get-vault', [uintCV(vaultId)]);
     }
 
     async getTimeRemaining(vaultId) {
-        if (vaultId === undefined || vaultId === null) throw new Error('vaultId is required');
+        assertPositiveInteger(vaultId, 'vaultId');
         return this.callReadOnly('get-time-remaining', [uintCV(vaultId)]);
     }
 
     async canWithdraw(vaultId) {
-        if (vaultId === undefined || vaultId === null) throw new Error('vaultId is required');
+        assertPositiveInteger(vaultId, 'vaultId');
         return this.callReadOnly('can-withdraw', [uintCV(vaultId)]);
     }
 
@@ -59,19 +90,20 @@ export class TimeFiClient {
     // --- Transaction Signing Options Helpers ---
 
     getCreateVaultOptions(amountSTX, lockDurationBlocks) {
+        assertPositiveInteger(lockDurationBlocks, 'lockDurationBlocks');
         return {
             contractAddress: this.contractAddress,
             contractName: CONTRACT_NAMES.VAULT,
             functionName: 'create-vault',
-            functionArgs: [uintCV(amountSTX * 1_000_000), uintCV(lockDurationBlocks)],
+            functionArgs: [uintCV(toMicroStx(amountSTX)), uintCV(lockDurationBlocks)],
             network: this.network,
             anchorMode: AnchorMode.Any,
-            postConditionMode: PostConditionMode.Deny,
+            postConditionMode: PostConditionMode.Allow,
         };
     }
 
     getWithdrawOptions(vaultId) {
-        if (vaultId === undefined || vaultId === null) throw new Error('vaultId is required');
+        assertPositiveInteger(vaultId, 'vaultId');
         return {
             contractAddress: this.contractAddress,
             contractName: CONTRACT_NAMES.VAULT,
@@ -79,7 +111,7 @@ export class TimeFiClient {
             functionArgs: [uintCV(vaultId)],
             network: this.network,
             anchorMode: AnchorMode.Any,
-            postConditionMode: PostConditionMode.Deny,
+            postConditionMode: PostConditionMode.Allow,
         };
     }
 }
