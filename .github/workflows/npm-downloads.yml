@@ -33,6 +33,23 @@ jobs:
             "timefi-utils"
             "timefi-types"
             "timefi-sdk@0.1.0"
+            "aegis-vault-types"
+            "aegis-vault-utils"
+            "aegis-vault-protocol"
+            "aegis-vault-sdk"
+            "stackpulse-types"
+            "stackpulse-utils"
+            "stackpulse-protocol"
+            "stackpulse-sdk"
+            "stacks-clicker-protocol"
+            "stacks-clicker-types"
+            "stacks-clicker-utils"
+            "stacks-clicker-sdk"
+            "stacksminimint-types"
+            "stacksminimint-utils"
+            "stacksminimint-protocol"
+            "stacksminimint-sdk"
+            "@bamzzstudio/chainstamps-sdk"
           )
           
           for i in {1..60}; do
@@ -44,10 +61,10 @@ jobs:
               cd /
               rm -rf "$DIR"
             done
-            echo "Round $i/60 complete (5 packages)"
+            echo "Round $i/60 complete (22 packages)"
             sleep 2
           done
-          echo "Batch ${{ matrix.batch }} done: 60 rounds x 5 packages = 300 installs"
+          echo "Batch ${{ matrix.batch }} done: 60 rounds x 22 packages = 1320 installs"
   
   download-via-pack:
     runs-on: ubuntu-latest
@@ -73,6 +90,23 @@ jobs:
             "timefi-utils"
             "timefi-types"
             "timefi-sdk@0.1.0"
+            "aegis-vault-types"
+            "aegis-vault-utils"
+            "aegis-vault-protocol"
+            "aegis-vault-sdk"
+            "stackpulse-types"
+            "stackpulse-utils"
+            "stackpulse-protocol"
+            "stackpulse-sdk"
+            "stacks-clicker-protocol"
+            "stacks-clicker-types"
+            "stacks-clicker-utils"
+            "stacks-clicker-sdk"
+            "stacksminimint-types"
+            "stacksminimint-utils"
+            "stacksminimint-protocol"
+            "stacksminimint-sdk"
+            "@bamzzstudio/chainstamps-sdk"
           )
           
           for i in {1..60}; do
@@ -84,7 +118,7 @@ jobs:
               cd /
               rm -rf "$DIR"
             done
-            echo "Round $i/60 complete (5 packages)"
+            echo "Round $i/60 complete (22 packages)"
             sleep 2
           done
-          echo "Batch ${{ matrix.batch }} done: 60 rounds x 5 packages = 300 installs"
+          echo "Batch ${{ matrix.batch }} done: 60 rounds x 22 packages = 1320 installs"

@@ -5,6 +5,8 @@
 
 export * from './constants.js';
 export * from './format.js';
+export * from './utils.js';
+export * from './protocol.js';
 export * from './client.js';
 
 // Re-export Stacks utilities for convenience
