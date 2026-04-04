@@ -10,7 +10,8 @@ The official JavaScript SDK for interacting with the **TimeFi Protocol** on the 
 
 - Protocol Client: Easy-to-use `TimeFiClient` for read and write interactions.
 - On-chain Data: Fetch TVL, vault status, and lock durations directly from smart contracts.
-- Formatting Utilities: Standardized formatting for STX (microSTX to STX), addresses, and dates.
+- Formatting Utilities: Standardized formatting for STX (microSTX to STX), addresses, dates, and timestamps.
+- Shared Helpers: Utility helpers and protocol models from the old `timefi-utils` and `timefi-types` packages are now included directly in `timefi-sdk`.
 - Mainnet/Testnet Support: Unified interface for both networks.
 
 ## Installation
@@ -51,6 +52,20 @@ const shortAddress = formatAddress('SP3F1234567890ABCDEFG1234567890XYZ123');
 console.log(shortAddress);
 ```
 
+### Use Integrated Utilities and Protocol Helpers
+
+```javascript
+import {
+  calculateTimeRemaining,
+  getProtocolConfig,
+  validateAddress,
+} from 'timefi-sdk';
+
+const config = getProtocolConfig();
+const remaining = calculateTimeRemaining(Date.now() + 60_000);
+const isValid = validateAddress('SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N');
+```
+
 ## Running Tests
 
 ```bash
@@ -64,6 +79,20 @@ The SDK exports:
 - `TimeFiClient`
 - `formatSTX(microStx)`
 - `formatAddress(address)`
+- `formatTimestamp(timestamp)`
+- `calculateTimeRemaining(endTime)`
+- `validateAddress(address)`
+- `validateAddressResult(address)`
+- `formatAmount(amount, decimals?)`
+- `parseAmount(amount)`
+- `generateId()`
+- `sleep(ms)`
+- `retry(fn, maxRetries?, delay?)`
+- `initializeProtocol(options?)`
+- `getProtocolVersion()`
+- `getProtocolConfig()`
+- `normalizeVault(vault)`
+- `normalizeTransaction(transaction)`
 - `formatNumber(value)`
 - `formatPercent(value)`
 - `formatDate(value)`
