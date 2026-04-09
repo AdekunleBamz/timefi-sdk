@@ -41,12 +41,12 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/AdekunleBamz/timefi-sdk.git"
+        "url": "git+https://github.com/AdekunleBamz/TimeFi-Protocol.git"
     },
     "bugs": {
-        "url": "https://github.com/AdekunleBamz/timefi-sdk/issues"
+        "url": "https://github.com/AdekunleBamz/TimeFi-Protocol/issues"
     },
-    "homepage": "https://github.com/AdekunleBamz/timefi-sdk#readme",
+    "homepage": "https://github.com/AdekunleBamz/TimeFi-Protocol#readme",
     "publishConfig": {
         "access": "public"
     },
